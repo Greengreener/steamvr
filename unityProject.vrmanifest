@@ -5,7 +5,7 @@
       "app_key": "application.generated.unity.steamvrlearning.exe",
       "launch_type": "url",
       "url": "steam://launch/",
-      "action_manifest_path": "C:\\Users\\Guest2\\Downloads\\SteamVR Learning\\Assets\\StreamingAssets\\SteamVR\\actions.json",
+      "action_manifest_path": "C:\\Users\\Guest2\\Documents\\steamvr\\Assets\\StreamingAssets\\SteamVR\\actions.json",
       "strings": {
         "en_us": {
           "name": "SteamVR Learning [Testing]"

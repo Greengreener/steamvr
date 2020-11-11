@@ -4,15 +4,49 @@ using UnityEngine;
 
 public class HeadScript : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField]
+    GameObject rightHand;
+    [SerializeField]
+    GameObject leftHand;
 
-    // Update is called once per frame
+    [SerializeField]
+    bool burgerTime;
+
+    bool rightHandIn;
+    bool leftHandIn;
+
     void Update()
     {
-        
+        if (rightHandIn && leftHandIn)
+        {
+            burgerTime = true;
+        }
+        if (!rightHandIn || !leftHandIn)
+        {
+            burgerTime = false;
+        }
+    }
+    private void OnTriggerEnter(Collider hand)
+    {
+        if (hand.gameObject == rightHand)
+        {
+            rightHandIn = true;
+        }
+        if (hand.gameObject == leftHand)
+        {
+            leftHandIn = true;
+        }
+    }
+    private void OnTriggerExit(Collider hand)
+    {
+
+        if (hand.gameObject == rightHand)
+        {
+            rightHandIn = false;
+        }
+        if (hand.gameObject == leftHand)
+        {
+            leftHandIn = false;
+        }
     }
 }
