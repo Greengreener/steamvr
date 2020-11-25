@@ -11,6 +11,11 @@ namespace Ty
         [SerializeField] private bool guard = false;
         [SerializeField] Transform sightPos;
         [SerializeField] float sightTime = 0.6f;
+        [SerializeField] GameObject hatRef;
+
+        public bool Satisfiable { get { return satisfiable; } }
+        public bool Guard { get { return guard; } }
+
         private GameObject playerRef;
         private bool satisfied = false;
         private Animator anim;
@@ -25,7 +30,14 @@ namespace Ty
             anim = GetComponent<Animator>();
             brgRef = FindObjectOfType<BurgerCounter>();
             agent = GetComponent<NavMeshAgent>();
-            playerRef = FindObjectOfType<Camera>().gameObject;
+            if (FindObjectOfType<HeadScript>())
+            {
+                playerRef = FindObjectOfType<HeadScript>().gameObject;
+            }
+            else
+            {
+                playerRef = FindObjectOfType<Camera>().gameObject;
+            }
             SelectLocation();
         }
 
@@ -49,6 +61,11 @@ namespace Ty
             else if (moveTimer > 0)
             {
                 moveTimer -= Time.deltaTime;
+            }
+
+            if (guard)
+            {
+                CheckSight();
             }
         }
 
@@ -83,14 +100,21 @@ namespace Ty
 
         private bool CanSeePlayer()
         {
-            if (Physics.Raycast(sightPos.position, (playerRef.transform.position - sightPos.position), out RaycastHit hit))
+            if (Vector3.Angle(sightPos.position, playerRef.transform.position) > 120)
             {
-                if (hit.collider.gameObject == playerRef)
+                print("Outside sight angle.");
+                return false;
+            }
+            if (!Physics.Raycast(sightPos.position, (playerRef.transform.position - sightPos.position), Vector3.Distance(sightPos.position, playerRef.transform.position)))
+            {
+                if (playerRef.GetComponent<HeadScript>())
                 {
-                    // Check Burger Mode here.
-
-                    return true;
+                    if (playerRef.GetComponent<HeadScript>().BurgerTime)
+                    {
+                        return false;
+                    }
                 }
+                return true;
             }
             return false;
         }
@@ -128,11 +152,28 @@ namespace Ty
             satisfied = true;
             FindObjectOfType<BurgerCounter>().AddToCount();
             SetAnimBool("Eat", true);
+            PauseMovement();
+        }
+
+        private void PauseMovement()
+        {
+            agent.destination = transform.position;
+            SetAnimBool("Moving", false, false);
+        }
+
+        private void ResumeMovement()
+        {
+            if (targetPos)
+            {
+                agent.destination = targetPos.position;
+                SetAnimBool("Moving");
+            }
         }
 
         public void DisplaySatisifed()
         {
-
+            hatRef.SetActive(true);
+            ResumeMovement();
         }
 
         private void OnTriggerEnter(Collider other)

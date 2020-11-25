@@ -11,6 +11,7 @@ public class HeadScript : MonoBehaviour
 
     [SerializeField]
     bool burgerTime;
+    public bool BurgerTime { get { return burgerTime; } }
 
     bool rightHandIn;
     bool leftHandIn;

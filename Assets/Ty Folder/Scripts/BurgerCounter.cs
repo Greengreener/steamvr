@@ -6,6 +6,7 @@ namespace Ty
 {
     public class BurgerCounter : MonoBehaviour
     {
+        [SerializeField] bool autoCountMax = true;
         [SerializeField] private int burgerCount = 1;
         [SerializeField] private GameObject messageObject;
         [SerializeField] private List<Transform> humanPositions = new List<Transform>();
@@ -18,6 +19,21 @@ namespace Ty
             if (currentCount >= burgerCount)
             {
                 CompleteCount();
+            }
+        }
+
+        private void Start()
+        {
+            if (autoCountMax)
+            {
+                burgerCount = 0;
+                foreach (RegularHumanScript human in FindObjectsOfType<RegularHumanScript>())
+                {
+                    if (human.Satisfiable)
+                    {
+                        burgerCount++;
+                    }
+                }
             }
         }
 
