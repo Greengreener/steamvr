@@ -43,5 +43,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: febaf8f8ff3a92848939427f9eef288a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  autoCountMax: 1
   burgerCount: 1
   messageObject: {fileID: 0}
+  humanPositions: []
+  burgerPrefab: {fileID: 8566295094950447205, guid: 1f531b38c00e5e0459d719a06f4d6498,
+    type: 3}
