@@ -10,8 +10,8 @@ public class Movement : MonoBehaviour
 
     Rigidbody rb;
 
-    float speed = 500;
-    float jumpSpeed = 5f;
+    [SerializeField] float speed = 500;
+    [SerializeField] float jumpSpeed = 5f;
     public Vector3 moveDirection;
 
     [SerializeField] GameObject VrCamera;
@@ -22,7 +22,7 @@ public class Movement : MonoBehaviour
     {
         if (VR)
         {
-            input = GetComponent<VrControllerInput>();
+            //input = GetComponent<VrControllerInput>();
             input.onTouchpadAxisChanged.AddListener(OnTouchAxisPressed);
         }
         rb = GetComponent<Rigidbody>();
@@ -60,7 +60,7 @@ public class Movement : MonoBehaviour
                 Mathf.Clamp(rb.velocity.y, 0, 0.5f);
                 break;
             case true:
-                gameObject.transform.rotation = VrCamera.transform.rotation;
+                // gameObject.transform.rotation = VrCamera.transform.rotation;
                 Mathf.Clamp(rb.velocity.x, 0, 0.5f);
                 Mathf.Clamp(rb.velocity.y, 0, 0.5f);
                 break;
@@ -71,10 +71,15 @@ public class Movement : MonoBehaviour
     {
         if (_args.source == SteamVR_Input_Sources.LeftHand)
         {
-            Vector3 camForward = VrCamera.transform.forward;
-            Vector3 camRight = VrCamera.transform.right;
+            print("touch pad axis = " + _args.touchpadAxis);
 
-            rb.AddRelativeForce(((camForward * _args.touchpadAxis.y) + (camRight * _args.touchpadAxis.x)) * speed * Time.deltaTime, ForceMode.Force);
+            Vector3 camEuler = VrCamera.transform.eulerAngles;
+            Vector2 touchAxis = _args.touchpadAxis;
+            Vector3 direction = new Vector3(touchAxis.x, 0f, touchAxis.y);
+            print("Direction " + direction * speed);
+            direction = Quaternion.Euler(0f, camEuler.y, 0f) * direction;
+            rb.AddForce(direction * speed);
+
         }
     }
 }

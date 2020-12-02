@@ -8,7 +8,7 @@ public class VrControllerInput : MonoBehaviour
 {
     [System.Serializable]
     public class InputEvent : UnityEvent<InputEventArgs> { }
-    public VrController Controller{get{return controller;}}
+    public VrController Controller { get { return controller; } }
 
     [SerializeField]
     SteamVR_Action_Boolean grab;
@@ -40,7 +40,7 @@ public class VrControllerInput : MonoBehaviour
     public void Setup(VrController _controller)
     {
         controller = _controller;
-        
+
         grab.AddOnStateDownListener(OnGrabDown, controller.InputSource);
         grab.AddOnStateUpListener(OnGrabUp, controller.InputSource);
 
@@ -55,9 +55,9 @@ public class VrControllerInput : MonoBehaviour
 
         touchpadAxis.AddOnChangeListener(OnTouchpadAxisChanged, controller.InputSource);
     }
-    InputEventArgs GenerateArgs()
+    InputEventArgs GenerateArgs(Vector2? _axis = null)
     {
-        return new InputEventArgs(controller, controller.InputSource, touchpadAxis.axis);
+        return new InputEventArgs(controller, controller.InputSource, _axis == null ? touchpadAxis.axis : _axis.Value);
     }
     void OnGrabDown(SteamVR_Action_Boolean _action, SteamVR_Input_Sources _source)
     {
@@ -93,7 +93,7 @@ public class VrControllerInput : MonoBehaviour
     }
     void OnTouchpadAxisChanged(SteamVR_Action_Vector2 _action, SteamVR_Input_Sources _source, Vector2 _axis, Vector2 _delta)
     {
-        onTouchpadAxisChanged.Invoke(GenerateArgs());
+        onTouchpadAxisChanged.Invoke(GenerateArgs(_axis));
     }
 
 }

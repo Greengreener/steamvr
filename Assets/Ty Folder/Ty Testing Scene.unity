@@ -8046,6 +8046,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   input: {fileID: 2034693181}
+  speed: 17
+  jumpSpeed: 5
   moveDirection: {x: 0, y: 0, z: 0}
   VrCamera: {fileID: 426261172}
   VR: 1
