@@ -485,6 +485,7 @@ GameObject:
   - component: {fileID: 4019558113360462130}
   - component: {fileID: 8957754139420516598}
   - component: {fileID: 5304247994394259330}
+  - component: {fileID: 8955196628654939294}
   m_Layer: 0
   m_Name: brger
   m_TagString: brger
@@ -541,3 +542,38 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &8955196628654939294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8566295094950447205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47fc65ee0de2b66459b76c83c0bee1b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isGrabbable: 1
+  isTouchable: 1
+  isUsable: 0
+  allowedSource: 0
+  attachPoint: {fileID: 0}
+  onGrabbed:
+    m_PersistentCalls:
+      m_Calls: []
+  onUnGrabbed:
+    m_PersistentCalls:
+      m_Calls: []
+  onTouched:
+    m_PersistentCalls:
+      m_Calls: []
+  onUnTouch:
+    m_PersistentCalls:
+      m_Calls: []
+  onUsed:
+    m_PersistentCalls:
+      m_Calls: []
+  onUnused:
+    m_PersistentCalls:
+      m_Calls: []
