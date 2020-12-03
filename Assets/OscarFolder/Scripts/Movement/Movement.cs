@@ -10,12 +10,12 @@ public class Movement : MonoBehaviour
 
     Rigidbody rb;
 
-    [SerializeField] float speed = 500;
+    [SerializeField] float speed = 17;
     [SerializeField] float jumpSpeed = 5f;
     public Vector3 moveDirection;
 
     [SerializeField] GameObject VrCamera;
-
+    [SerializeField] GameObject PcCamera;
     public bool VR;
 
     private void Start()
@@ -24,6 +24,10 @@ public class Movement : MonoBehaviour
         {
             //input = GetComponent<VrControllerInput>();
             input.onTouchpadAxisChanged.AddListener(OnTouchAxisPressed);
+        }
+        else
+        {
+            speed = 500;
         }
         rb = GetComponent<Rigidbody>();
     }
@@ -54,6 +58,9 @@ public class Movement : MonoBehaviour
                 {
                     rb.AddRelativeForce(Vector3.up * jumpSpeed, ForceMode.Impulse);
                 }
+
+
+
                 moveDirection = new Vector3(horizontal, 0, vertical);
                 rb.AddRelativeForce(moveDirection * speed * Time.deltaTime, ForceMode.Force);
                 Mathf.Clamp(rb.velocity.x, 0, 0.5f);

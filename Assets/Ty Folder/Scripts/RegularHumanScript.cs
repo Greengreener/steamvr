@@ -50,11 +50,11 @@ namespace Ty
                     moveTimer = Random.Range(1.8f, 3.5f);
                 }
                 SetAnimBool("Moving", false, false);
-                print("Location Arrived At.");
+                //print("Location Arrived At.");
             }
             if (moveTimer <= 0 && moveTimer > -1)
             {
-                print("Selecting New Location.");
+                //print("Selecting New Location.");
                 SelectLocation();
                 moveTimer = -1f;
             }
