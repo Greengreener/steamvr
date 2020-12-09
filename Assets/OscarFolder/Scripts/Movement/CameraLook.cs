@@ -37,6 +37,5 @@ public class CameraLook : MonoBehaviour
             _rotY = Mathf.Clamp(_rotY, minY, maxY);
             transform.localEulerAngles = new Vector3(-_rotY, 0, 0);
         }
-
     }
 }
