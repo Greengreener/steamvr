@@ -279,9 +279,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be44291c2fa5d6049a500b56c8f98068, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PC: {fileID: 0}
+  PCGlobal: {fileID: 0}
+  PCChild: {fileID: 0}
   VRGlobal: {fileID: 0}
-  VRCamera: {fileID: 0}
+  VRChild: {fileID: 0}
 --- !u!4 &69050335
 Transform:
   m_ObjectHideFlags: 0

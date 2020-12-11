@@ -17,7 +17,7 @@ public class ButtonSwap : MonoBehaviour
         {
             PCGlobal.SetActive(true);
         }
-        else
+        else if (VRGlobal)
         {
             VRGlobal.SetActive(true);
         }
@@ -29,9 +29,11 @@ public class ButtonSwap : MonoBehaviour
         {
             default:
                 globalControlType = ControlType.PCControl;
+                VrHelper.SetEnabled(false);
                 break;
             case 1:
                 globalControlType = ControlType.VRControl;
+                VrHelper.SetEnabled(true);
                 break;
         }
     }
