@@ -30,13 +30,13 @@ namespace Ty
             anim = GetComponent<Animator>();
             brgRef = FindObjectOfType<BurgerCounter>();
             agent = GetComponent<NavMeshAgent>();
-            if (FindObjectOfType<HeadScript>())
+            if (ButtonSwap.globalControlType == ControlType.PCControl)
             {
-                playerRef = FindObjectOfType<HeadScript>().gameObject;
+                playerRef = FindObjectOfType<ButtonSwap>().PCChild;
             }
             else
             {
-                playerRef = FindObjectOfType<Camera>().gameObject;
+                playerRef = FindObjectOfType<ButtonSwap>().VRChild;
             }
             SelectLocation();
         }
@@ -110,6 +110,13 @@ namespace Ty
                 if (playerRef.GetComponent<HeadScript>())
                 {
                     if (playerRef.GetComponent<HeadScript>().BurgerTime)
+                    {
+                        return false;
+                    }
+                }
+                else if (playerRef.GetComponent<BurgerModePCControl>())
+                {
+                    if (playerRef.GetComponent<BurgerModePCControl>().BurgerMode)
                     {
                         return false;
                     }
